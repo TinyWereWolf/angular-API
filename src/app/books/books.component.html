@@ -1,0 +1,25 @@
+<mat-card>
+    <form #idForm="ngForm">
+      <mat-form-field>
+          <input id = "bookNumber" ngModel name = "bookNumber" #num="ngModel" matInput placeholder= "Book's Number" required>
+      </mat-form-field>
+      <mat-form-field>
+        <input type= "text" id= "title" ngModel name= "title" #titre= "ngModel" matInput placeholder= "Books" required>
+    </mat-form-field>
+    <mat-form-field>
+      <input id= "pages" ngModel name="pages" #pages="ngModel" matInput placeholder=" Pages " required>
+  </mat-form-field>
+  <br>
+  <input type="submit" [disabled]="!idForm.valid" value= "Add"
+    (click)=" addBook(idForm.value.bookNumber, idForm.value.title, idForm.value.pages); idForm.reset()"> 
+    </form>
+</mat-card>
+<mat-list>
+    <mat-card *ngFor="let book of Books">
+      <mat-card-title>{{book.title}}</mat-card-title>
+      <mat-card-subtitle>({{book.bookNumber}})</mat-card-subtitle>
+      <mat-card-content><ul>{{book.pages}}</ul></mat-card-content>
+      <button (click)="deleteBook(book)"><mat-icon>delete</mat-icon></button>
+      <a routerLink="add-livre"><button (click)="update(book)"><mat-icon>build</mat-icon></button></a>
+    </mat-card>
+    </mat-list>
